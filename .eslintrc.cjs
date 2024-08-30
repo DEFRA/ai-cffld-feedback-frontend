@@ -8,12 +8,8 @@ module.exports = {
       extends: [
         'standard',
         'plugin:import/recommended',
-        'plugin:import/typescript',
-        'plugin:jsdoc/recommended-typescript-flavor',
         'plugin:n/recommended',
         'plugin:promise/recommended',
-        'plugin:@typescript-eslint/recommended-type-checked',
-        'plugin:@typescript-eslint/stylistic-type-checked',
         'prettier'
       ],
       env: {
@@ -26,14 +22,7 @@ module.exports = {
         project: ['./tsconfig.json'],
         tsconfigRootDir: __dirname
       },
-      plugins: [
-        '@typescript-eslint',
-        'import',
-        'jsdoc',
-        'n',
-        'promise',
-        'prettier'
-      ],
+      plugins: ['import', 'jsdoc', 'n', 'promise', 'prettier'],
       rules: {
         'prettier/prettier': [
           'error',
@@ -43,19 +32,12 @@ module.exports = {
         ],
         'no-console': 'error',
 
-        // Turn off strict type checking rules
-        '@typescript-eslint/no-unsafe-argument': 'off',
-        '@typescript-eslint/no-unsafe-assignment': 'off',
-        '@typescript-eslint/no-unsafe-call': 'off',
-        '@typescript-eslint/no-unsafe-member-access': 'off',
-        '@typescript-eslint/no-unsafe-return': 'off',
-
         // JSDoc blocks are optional by default
         'jsdoc/require-jsdoc': 'off',
 
         // JSDoc @param types are mandatory for JavaScript
         'jsdoc/require-param-description': 'off',
-        'jsdoc/require-param-type': 'error',
+        'jsdoc/require-param-type': 'off',
         'jsdoc/require-param': 'off',
 
         // JSDoc @property description is optional

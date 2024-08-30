@@ -3,56 +3,55 @@
 {% block content %}
   {{ appHeading({
     text: heading,
-    caption: "Core delivery platform Node.js Frontend Template."
+    caption: "AI PoC for CFFLD Feedback Analysis"
   }) }}
 
-  {% call appPageBody() %}
-    <p>
-      Welcome to the Frontend Template, a starter kit for Core Delivery Platform Node.js Frontends 🚀
-    </p>
-    <p>
-      Based on <a href="https://github.com/DEFRA/design-standards">DEFRA</a> and <a
-              href="https://design-system.service.gov.uk/">GOV.UK</a> best practices this starter kit provides you with
-      a deployable, production ready template 🙌🏻 to start your new service with.
-    </p>
-
-    <ul>
-      <li>
-        <a href="https://frontend.design-system.service.gov.uk/">GOV.UK Frontend</a>
-      </li>
-      <li>
-        <a href="https://hapi.dev">Hapi</a>
-      </li>
-      <li>
-        <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a>
-      </li>
-      <li>
-        <a href="https://github.com/mozilla/node-convict">Node Convict</a>
-      </li>
-      <li>
-        <a href="https://jestjs.io/">Jest testing</a>
-      </li>
-      <li>
-        <a href="https://webdriver.io">WebdriverIO</a> User Journey testing
-      </li>
-      <li>GitHub Actions Pull Request and Publish jobs</li>
-      <li>
-        <a href="https://github.com/pinojs/pino">PinoJs logging</a>
-      </li>
-      <li>
-        <a href="https://standardjs.com">Standard JS</a>
-      </li>
-      <li>
-        <a href="https://eslint.org">ESLint</a>
-      </li>
-      <li>
-        <a href="https://stylelint.io">StyleLint</a>
-      </li>
-      <li>
-        <a href="https://prettier.io">Prettier</a>
-      </li>
-      <li>and lots more... 😎</li>
-    </ul>
-  {% endcall %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+        <div class="govuk-cards govuk-cards--2">
+          <div class="govuk-cards--2__item govuk-card--dashboard">
+            <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Urgent</h2>
+            <p class="govuk-hint">
+              Urgent feedback received in the last week
+            </p>
+            <p class="govuk-body govuk-!-font-size-48 govuk-!-font-weight-bold">
+              {{ dashboard.urgent.weekly }}
+            </p>
+            <ul class="govuk-list">
+              <li>
+                  <a href="/feedback?urgent=true&from_date={{ dashboard.weekQuery.fromDate }}&to_date={{ dashboard.weekQuery.toDate }}" class="govuk-link">View</a>
+              </li>
+            </ul>
+          </div>
+          <div class="govuk-cards--2__item govuk-card--dashboard">
+            <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Last Week</h2>
+            <p class="govuk-hint">
+              All feedback received in the last week
+            </p>
+            <p class="govuk-body govuk-!-font-size-48 govuk-!-font-weight-bold">
+              {{ dashboard.feedback.weekly }}
+            </p>
+            <ul class="govuk-list">
+              <li>
+                  <a href="/feedback?from_date={{ dashboard.weekQuery.fromDate }}&to_date={{ dashboard.weekQuery.toDate }}" class="govuk-link">View</a>
+              </li>
+            </ul>
+          </div>
+          <div class="govuk-cards--2__item govuk-card--dashboard">
+            <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Total Feedback</h2>
+            <p class="govuk-hint">
+              A complete archive of all feedback received
+            </p>
+            <p class="govuk-body govuk-!-font-size-48 govuk-!-font-weight-bold">
+              {{ dashboard.feedback.allTime }}
+            </p>
+            <ul class="govuk-list">
+              <li>
+                  <a href="/feedback" class="govuk-link">View</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </div>
 
 {% endblock %}
