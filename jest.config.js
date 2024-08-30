@@ -1,6 +1,3 @@
-/**
- * @type {Config}
- */
 export default {
   rootDir: '.',
   verbose: true,
@@ -10,6 +7,10 @@ export default {
   testMatch: ['**/src/**/*.test.js'],
   reporters: ['default', ['github-actions', { silent: false }], 'summary'],
   collectCoverageFrom: ['src/**/*.js'],
+  transform: {
+    '^.+\\.js$': 'babel-jest'
+  },
+  transformIgnorePatterns: [],
   coveragePathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/.server',
@@ -19,7 +20,3 @@ export default {
   ],
   coverageDirectory: '<rootDir>/coverage'
 }
-
-/**
- * @import { Config } from 'jest'
- */

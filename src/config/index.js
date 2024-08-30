@@ -82,20 +82,20 @@ export const config = convict({
       env: 'LOG_FORMAT'
     }
   },
-  httpProxy: /** @type {SchemaObj<string | null>} */ ({
+  httpProxy: {
     doc: 'HTTP Proxy',
     format: String,
     nullable: true,
     default: null,
     env: 'CDP_HTTP_PROXY'
-  }),
-  httpsProxy: /** @type {SchemaObj<string | null>} */ ({
+  },
+  httpsProxy: {
     doc: 'HTTPS Proxy',
     format: String,
     nullable: true,
     default: null,
     env: 'CDP_HTTPS_PROXY'
-  }),
+  },
   enableSecureContext: {
     doc: 'Enable Secure Context',
     format: Boolean,
@@ -151,7 +151,7 @@ export const config = convict({
       }
     }
   },
-  redis: /** @type {Schema<RedisConfig>} */ ({
+  redis: {
     host: {
       doc: 'Redis cache host',
       format: String,
@@ -183,7 +183,7 @@ export const config = convict({
       default: !isProduction,
       env: 'USE_SINGLE_INSTANCE_CACHE'
     }
-  }),
+  },
   nunjucks: {
     watch: {
       doc: 'Reload templates when they are changed.',
@@ -195,12 +195,35 @@ export const config = convict({
       format: Boolean,
       default: isDevelopment
     }
+  },
+  feedbackApi: {
+    baseUrl: {
+      doc: 'Feedback Backend API URL',
+      format: String,
+      default: 'http://localhost:3001/feedback',
+      env: 'FEEDBACK_API_URL'
+    }
+  },
+  aws: {
+    region: {
+      doc: 'AWS Region',
+      format: String,
+      default: 'eu-west-2',
+      env: 'AWS_REGION'
+    },
+    accessKeyId: {
+      doc: 'AWS Access Key ID',
+      format: '*',
+      default: '',
+      env: 'AWS_ACCESS_KEY_ID'
+    },
+    secretAccessKey: {
+      doc: 'AWS Secret Access Key',
+      format: '*',
+      default: '',
+      env: 'AWS_SECRET_ACCESS_KEY'
+    }
   }
 })
 
 config.validate({ allowed: 'strict' })
-
-/**
- * @import { Schema, SchemaObj } from 'convict'
- * @import { RedisConfig } from '~/src/server/common/helpers/redis-client.js'
- */

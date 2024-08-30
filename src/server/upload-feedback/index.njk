@@ -1,0 +1,25 @@
+{% from "govuk/components/file-upload/macro.njk" import govukFileUpload %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% extends 'layouts/page.njk' %}
+
+{% block pageTitle %}
+  Upload Feedback | {{ serviceName }}
+{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-l">Upload CFFLD Feedback</h1>
+
+  <form method="post" enctype="multipart/form-data" novalidate="novalidate">
+    {{ govukFileUpload({
+      id: "feedback-upload",
+      name: "feedbackUpload",
+      label: {
+        text: "Choose feedback (xlsx) to upload"
+      }
+    }) }}
+
+    {{ govukButton({
+      text: "Upload"
+    }) }}
+  </form>
+{% endblock %}

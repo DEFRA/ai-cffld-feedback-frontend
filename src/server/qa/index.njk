@@ -1,0 +1,66 @@
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% extends 'layouts/page.njk' %}
+
+{% block content %}
+  {{ appHeading({
+    text: heading,
+    caption: "AI PoC for CFFLD Feedback Analysis"
+  }) }}
+
+  <dl class="govuk-summary-list">
+    {% for message in qa.messages %}
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">{{ message.user }}</dt>
+        <dd class="govuk-summary-list__value">
+          {% for line in message.content %}
+            {{ line }}<br>
+          {% endfor %}
+        </dd>
+      </div>
+
+      {% if message.user == "System" and message.query %}
+        <details class="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+              GraphQL Query
+            </span>
+          </summary>
+          <div class="govuk-details__text">
+            <pre>{{ message.query }}</pre>
+
+            {{ govukButton({
+              text: "View Query",
+              href: "/qa/query/" + message.index
+            }) }}
+          </div>
+        </details>
+      {% endif %}
+    {% endfor %}
+  </dl>
+
+  <form class="govuk-form" method="post">
+    {{ govukInput({
+      label: {
+        text: "Your question about feedback"
+      },
+      id: "user-prompt",
+      name: "userPrompt"
+    }) }}
+    
+    <div class="govuk-button-group">
+      {{ govukButton({
+        text: "Send"
+      }) }}
+
+      {{ govukButton({
+        text: "Reset",
+        classes: "govuk-button--warning",
+        name: "reset",
+        value: "reset"
+      }) }}
+    </div>
+  </form>
+
+{% endblock %}
